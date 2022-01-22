@@ -5,7 +5,7 @@
     <groupId>com.phenom</groupId>
     <artifactId>qh-phenom</artifactId>
     <version>1.0.0</version>
-    <description>fdd-sdk</description>
+    <description>oa</description>
     <packaging>jar</packaging>
 
     <properties>
