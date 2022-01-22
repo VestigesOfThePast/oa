@@ -1,0 +1,257 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.phenom.web.mapper.SysMenuMapper">
+  <resultMap id="BaseResultMap" type="com.phenom.web.domain.SysMenu">
+    <!--@mbg.generated-->
+    <!--@Table sys_menu-->
+    <id column="menu_id" jdbcType="BIGINT" property="menuId" />
+    <result column="menu_name" jdbcType="VARCHAR" property="menuName" />
+    <result column="parent_id" jdbcType="BIGINT" property="parentId" />
+    <result column="order_num" jdbcType="INTEGER" property="orderNum" />
+    <result column="path" jdbcType="VARCHAR" property="path" />
+    <result column="component" jdbcType="VARCHAR" property="component" />
+    <result column="is_frame" jdbcType="INTEGER" property="isFrame" />
+    <result column="menu_type" jdbcType="CHAR" property="menuType" />
+    <result column="visible" jdbcType="CHAR" property="visible" />
+    <result column="status" jdbcType="CHAR" property="status" />
+    <result column="perms" jdbcType="VARCHAR" property="perms" />
+    <result column="icon" jdbcType="VARCHAR" property="icon" />
+    <result column="create_by" jdbcType="VARCHAR" property="createBy" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_by" jdbcType="VARCHAR" property="updateBy" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="remark" jdbcType="VARCHAR" property="remark" />
+  </resultMap>
+
+
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    menu_id, menu_name, parent_id, order_num, `path`, component, is_frame, menu_type, 
+    visible, `status`, perms, icon, create_by, create_time, update_by, update_time, remark
+  </sql>
+
+  <sql id="selectMenuVo">
+        select menu_id as menuId, menu_name as menuName, parent_id as parentId, order_num as orderNum, path, component, is_frame as isFrame, menu_type as menuType, visible, status, ifnull(perms,'') as perms, icon, create_time as createTime
+		from sys_menu
+    </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    <!--@mbg.generated-->
+    select 
+    <include refid="Base_Column_List" />
+    from sys_menu
+    where menu_id = #{menuId,jdbcType=BIGINT}
+  </select>
+  <select id="selectTree" resultType="com.phenom.web.domain.vo.SysMenuVo">
+     <include refid="selectMenuVo"/>
+     <where>
+		<if test="visible != null and visible != ''">
+			AND visible = #{visible}
+		</if>
+		<if test="status != null and status != ''">
+			AND status = #{status}
+		</if>
+	 </where>
+	 order by order_num
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    <!--@mbg.generated-->
+    delete from sys_menu
+    where menu_id = #{menuId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" keyColumn="menu_id" keyProperty="menuId" parameterType="com.phenom.web.domain.SysMenu" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into sys_menu (menu_name, parent_id, order_num, 
+      `path`, component, is_frame, 
+      menu_type, visible, `status`, perms, 
+      icon, create_by, create_time, 
+      update_by, update_time, remark
+      )
+    values (#{menuName,jdbcType=VARCHAR}, #{parentId,jdbcType=BIGINT}, #{orderNum,jdbcType=INTEGER}, 
+      #{path,jdbcType=VARCHAR}, #{component,jdbcType=VARCHAR}, #{isFrame,jdbcType=INTEGER}, 
+      #{menuType,jdbcType=CHAR}, #{visible,jdbcType=CHAR}, #{status,jdbcType=CHAR}, #{perms,jdbcType=VARCHAR}, 
+      #{icon,jdbcType=VARCHAR}, #{createBy,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{updateBy,jdbcType=VARCHAR}, #{updateTime,jdbcType=TIMESTAMP}, #{remark,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" keyColumn="menu_id" keyProperty="menuId" parameterType="com.phenom.web.domain.SysMenu" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into sys_menu
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="menuName != null">
+        menu_name,
+      </if>
+      <if test="parentId != null">
+        parent_id,
+      </if>
+      <if test="orderNum != null">
+        order_num,
+      </if>
+      <if test="path != null">
+        `path`,
+      </if>
+      <if test="component != null">
+        component,
+      </if>
+      <if test="isFrame != null">
+        is_frame,
+      </if>
+      <if test="menuType != null">
+        menu_type,
+      </if>
+      <if test="visible != null">
+        visible,
+      </if>
+      <if test="status != null">
+        `status`,
+      </if>
+      <if test="perms != null">
+        perms,
+      </if>
+      <if test="icon != null">
+        icon,
+      </if>
+      <if test="createBy != null">
+        create_by,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="updateBy != null">
+        update_by,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+      <if test="remark != null">
+        remark,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="menuName != null">
+        #{menuName,jdbcType=VARCHAR},
+      </if>
+      <if test="parentId != null">
+        #{parentId,jdbcType=BIGINT},
+      </if>
+      <if test="orderNum != null">
+        #{orderNum,jdbcType=INTEGER},
+      </if>
+      <if test="path != null">
+        #{path,jdbcType=VARCHAR},
+      </if>
+      <if test="component != null">
+        #{component,jdbcType=VARCHAR},
+      </if>
+      <if test="isFrame != null">
+        #{isFrame,jdbcType=INTEGER},
+      </if>
+      <if test="menuType != null">
+        #{menuType,jdbcType=CHAR},
+      </if>
+      <if test="visible != null">
+        #{visible,jdbcType=CHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=CHAR},
+      </if>
+      <if test="perms != null">
+        #{perms,jdbcType=VARCHAR},
+      </if>
+      <if test="icon != null">
+        #{icon,jdbcType=VARCHAR},
+      </if>
+      <if test="createBy != null">
+        #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateBy != null">
+        #{updateBy,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remark != null">
+        #{remark,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.phenom.web.domain.SysMenu">
+    <!--@mbg.generated-->
+    update sys_menu
+    <set>
+      <if test="menuName != null">
+        menu_name = #{menuName,jdbcType=VARCHAR},
+      </if>
+      <if test="parentId != null">
+        parent_id = #{parentId,jdbcType=BIGINT},
+      </if>
+      <if test="orderNum != null">
+        order_num = #{orderNum,jdbcType=INTEGER},
+      </if>
+      <if test="path != null">
+        `path` = #{path,jdbcType=VARCHAR},
+      </if>
+      <if test="component != null">
+        component = #{component,jdbcType=VARCHAR},
+      </if>
+      <if test="isFrame != null">
+        is_frame = #{isFrame,jdbcType=INTEGER},
+      </if>
+      <if test="menuType != null">
+        menu_type = #{menuType,jdbcType=CHAR},
+      </if>
+      <if test="visible != null">
+        visible = #{visible,jdbcType=CHAR},
+      </if>
+      <if test="status != null">
+        `status` = #{status,jdbcType=CHAR},
+      </if>
+      <if test="perms != null">
+        perms = #{perms,jdbcType=VARCHAR},
+      </if>
+      <if test="icon != null">
+        icon = #{icon,jdbcType=VARCHAR},
+      </if>
+      <if test="createBy != null">
+        create_by = #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateBy != null">
+        update_by = #{updateBy,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remark != null">
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where menu_id = #{menuId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.phenom.web.domain.SysMenu">
+    <!--@mbg.generated-->
+    update sys_menu
+    set menu_name = #{menuName,jdbcType=VARCHAR},
+      parent_id = #{parentId,jdbcType=BIGINT},
+      order_num = #{orderNum,jdbcType=INTEGER},
+      `path` = #{path,jdbcType=VARCHAR},
+      component = #{component,jdbcType=VARCHAR},
+      is_frame = #{isFrame,jdbcType=INTEGER},
+      menu_type = #{menuType,jdbcType=CHAR},
+      visible = #{visible,jdbcType=CHAR},
+      `status` = #{status,jdbcType=CHAR},
+      perms = #{perms,jdbcType=VARCHAR},
+      icon = #{icon,jdbcType=VARCHAR},
+      create_by = #{createBy,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_by = #{updateBy,jdbcType=VARCHAR},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      remark = #{remark,jdbcType=VARCHAR}
+    where menu_id = #{menuId,jdbcType=BIGINT}
+  </update>
+
+</mapper>
