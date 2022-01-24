@@ -6,13 +6,10 @@ server:
 
 # Spring配置
 spring:
-  datasource:
-    type: com.alibaba.druid.pool.DruidDataSource
-    driverClassName: com.mysql.cj.jdbc.Driver
-    druid:
-      url: jdbc:mysql://10.0.3.5:36895/wop_sit?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=true&serverTimezone=GMT%2B8
-      username: wop_sit
-      password: wRbQvStlyiHy1PS
+  profiles:
+    active: sit
+
+
 
 # MyBatis配置
 mybatis:

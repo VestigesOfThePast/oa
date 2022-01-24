@@ -119,12 +119,19 @@ public enum ResultCode implements IErrorCode {
      * 获取锁失败
      */
     LOOK_GET_ERROR("E00007","获取锁失败"),
+    /**
+     * 签名创建异常
+     */
+    SIGN_CREATE_FAIL("E00008", "签名创建异常"),
+
 
     //参数 P
     /**
      * 参数检验失败
      */
     PARAM_VALIDATE_FAIL("P00001", "参数检验失败");
+
+
 
     private String code;
     private String message;

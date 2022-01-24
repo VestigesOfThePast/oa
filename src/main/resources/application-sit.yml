@@ -1,0 +1,22 @@
+# 数据源配置
+spring:
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    driverClassName: com.mysql.cj.jdbc.Driver
+    druid:
+      url: jdbc:mysql://10.0.3.5:36895/wop_sit?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=true&serverTimezone=GMT%2B8
+      username: wop_sit
+      password: wRbQvStlyiHy1PS
+
+
+#中台账户查询接口
+dataCentral:
+  appKey: dec69f85-1328-46c1-bcce-03ac609eebda
+  secret: d5fb5b2f-2628-42a2-8139-a10c8283b3cc
+  tenantId: 1406811488909991937
+  getTokenUrl: http://sit.data.jrit.top/api/token?appkey=${dataCentral.appKey}&secret=${dataCentral.secret}
+  queryAccountUrl: http://sit.data.jrit.top/api/outside/uhr-emps
+  orgTreeUrl: http://sit.data.jrit.top/api/sysorganization/tree?tenantId=1406811488909991937
+  empInfoUrl: http://sit.data.jrit.top/api/empinfo/list
+  orgAndEmpTreeUrl: http://sit.data.jrit.top/api/outside/wop-org?tenantId=%s
+  outsideEmpUrl: http://sit.data.jrit.top/api/outside/ywwb-employee
