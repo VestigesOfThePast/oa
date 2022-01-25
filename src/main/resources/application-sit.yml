@@ -20,3 +20,22 @@ dataCentral:
   empInfoUrl: http://sit.data.jrit.top/api/empinfo/list
   orgAndEmpTreeUrl: http://sit.data.jrit.top/api/outside/wop-org?tenantId=%s
   outsideEmpUrl: http://sit.data.jrit.top/api/outside/ywwb-employee
+
+# 定时任务
+xxl:
+  job:
+    #与调度中心的通讯校验token,测试环境固定为test
+    accessToken: test
+    admin:
+      #调度中心地址,外网地址:http://42.193.185.57:8010/xxl-job-admin;内网地址:http://10.0.3.14:8010/xxl-job-admin
+      addresses: http://10.0.5.75:31115/xxl-job-admin
+    executor:
+      #应用名,与自身应用一致即可,后续在调度中心需要用到改应用名.
+      appname: phenom
+      # ip:
+      #通讯端口:默认端口9999,可自行配置,与应用端口区分开即可.
+      port: 9998
+      #xxl-job调度日志保存路径
+      logpath: logs/xxl-job/
+      #日志保留天数
+      logretentiondays: 15

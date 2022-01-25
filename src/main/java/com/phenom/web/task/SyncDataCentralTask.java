@@ -8,8 +8,6 @@ import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
 import java.text.SimpleDateFormat;
-import java.time.LocalDateTime;
-import java.util.Date;
 
 /**
  * @ClassName: SyncDataCenterTask
@@ -34,12 +32,14 @@ public class SyncDataCentralTask {
      */
     @XxlJob("syncEmployeeInfo")
     public ReturnT<String> syncEmpInfoJobHandler(String param){
+        System.out.println("-----人员信息同步开始--------");
         try {
-            dataCentralService.syncEmpInfo(sdf.format(new Date()));
+            dataCentralService.syncEmpInfo(null);
         } catch (Exception e) {
             log.error("同步中台员工数据到sys_emp任务执行失败'ERROR: {}", e.getMessage());
             return new ReturnT(ReturnT.FAIL_CODE,e.getMessage());
         }
+        System.out.println("-----人员信息同步结束--------");
         return ReturnT.SUCCESS;
     }
 }

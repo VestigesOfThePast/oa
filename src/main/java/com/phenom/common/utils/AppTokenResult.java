@@ -17,7 +17,7 @@ public class AppTokenResult {
 
     private Long expires;
 
-    public static AppTokenResult success(String token,Long expires){
+    public static AppTokenResult success(String token, Long expires){
         return new AppTokenResult(0,"success",token,expires);
     }
 

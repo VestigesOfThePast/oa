@@ -10,13 +10,13 @@ spring:
     active: sit
 
 
-
 # MyBatis配置
 mybatis:
     # 搜索指定包别名
     typeAliasesPackage: com.phenom.**.domain
     # 配置mapper的扫描，找到所有的mapper.xml映射文件
     mapperLocations: classpath*:mapper/**/*Mapper.xml
+
 
 
 

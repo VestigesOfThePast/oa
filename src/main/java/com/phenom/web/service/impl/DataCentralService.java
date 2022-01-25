@@ -5,6 +5,7 @@ import cn.hutool.http.HttpResponse;
 import cn.hutool.http.HttpUtil;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import com.phenom.common.constant.UserConstant;
 import com.phenom.common.enums.ResultCode;
 import com.phenom.common.exception.BizException;
 import com.phenom.common.utils.AjaxResult;
@@ -12,11 +13,15 @@ import com.phenom.common.utils.AppTokenResult;
 import com.phenom.common.utils.SignUtil;
 import com.phenom.web.domain.SysEmployee;
 import com.phenom.web.domain.dto.DataCentralEmpInfoDto;
+import com.phenom.web.domain.vo.SysEmployeeVo;
+import com.phenom.web.service.SysEmployeeService;
+import org.apache.commons.collections4.MapUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
+import javax.annotation.Resource;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
@@ -40,6 +45,9 @@ public class DataCentralService {
     @Value("${dataCentral.secret}")
     private String secret;
 
+    @Resource
+    private SysEmployeeService sysEmployeeService;
+
 
     /**
      * 数据中台员工信息同步
@@ -56,22 +64,21 @@ public class DataCentralService {
                 // 中台员工信息转为工单员工信息
                 SysEmployee sysEmp = new SysEmployee();
                 BeanUtils.copyProperties(item, sysEmp);
-                if (DataCentralEmpInfoDTO.ON_JOB_STATUS_NO.equals(item.getOnJobStatus())) {
-                    sysEmp.setStatus(UserConstants.DISABLE);
+                if (DataCentralEmpInfoDto.ON_JOB_STATUS_NO.equals(item.getOnJobStatus())) {
+                    sysEmp.setStatus(UserConstant.DISABLE);
                 }else{
-                    sysEmp.setStatus(UserConstants.ENABLE);
+                    sysEmp.setStatus(UserConstant.ENABLE);
                 }
-                sysEmp.setCreateBy(UserConstants.SYS_USER);
-                sysEmp.setUpdateBy(UserConstants.SYS_USER);
+                sysEmp.setCreateBy(UserConstant.SYS_USER);
+                sysEmp.setUpdateBy(UserConstant.SYS_USER);
 
                 // 保存信息：先查询是否已存在，存在更新，不存在插入
-                SysEmpVO sysEmpVO = sysEmpService.selectSysEmpByUserName(item.getUserName());
-
-                if(sysEmpVO == null){
-                    sysEmpService.insertSysEmp(sysEmp);
+                SysEmployeeVo sysEmployeeVo = sysEmployeeService.selectSysEmpByUserName(item.getUserName());
+                if(sysEmployeeVo == null){
+                    sysEmployeeService.insertSysEmp(sysEmp);
                 }else{
-                    sysEmp.setId(sysEmpVO.getId());
-                    sysEmpService.updateSysEmpById(sysEmp);
+                    sysEmp.setId(sysEmployeeVo.getId());
+                    sysEmployeeService.updateSysEmpById(sysEmp);
                 }
             }
         }
@@ -84,22 +91,19 @@ public class DataCentralService {
      */
     private List<DataCentralEmpInfoDto> getEmpInfoList(DataCentralEmpInfoDto empInfoDTO) {
         String params = JSONObject.toJSONString(empInfoDTO);
-        HttpRequest request = HttpUtil.createGet(empInfoUrl);
-        request.addHeaders(buildHeader(params));
+        HttpRequest request = HttpUtil.createPost(empInfoUrl);
+        request.addHeaders(buildHeader(params)).body(params);
         HttpResponse response = request.execute();
         // 处理响应
         if(response.isOk()){
             AjaxResult ajaxResult = JSON.parseObject(response.body(), AjaxResult.class);
             if(MapUtils.getInteger(ajaxResult, AjaxResult.CODE_TAG) != 0){
-                log.info("获取中台人员列表(详细信息)失败：{}", ajaxResult.get(AjaxResult.MSG_TAG));
-                throw new CustomException("数据获取失败：" + ajaxResult.get(AjaxResult.MSG_TAG), ResultCode.FAILURE.getCode());
+                throw new BizException(ResultCode.ERROR.getCode(), "数据获取失败：" + ajaxResult.get(AjaxResult.MSG_TAG));
             }
-            return JSON.parseArray(MapUtils.getString(ajaxResult, AjaxResult.DATA_TAG), DataCentralEmpInfoDTO.class);
+            return JSON.parseArray(MapUtils.getString(ajaxResult, AjaxResult.DATA_TAG), DataCentralEmpInfoDto.class);
         } else {
-            log.info("获取中台人员列表(详细信息)失败：{}", response.body());
-            throw new CustomException("数据获取失败");
+            throw new BizException(ResultCode.ERROR.getCode(), "数据获取失败!");
         }
-        return null;
     }
 
     /**
@@ -114,7 +118,6 @@ public class DataCentralService {
         headers.put("token", token);
         headers.put("appkey", appkey);
         headers.put("timestamp", timestamp);
-
         JSONObject jsonObject = (params == null) ? new JSONObject() : JSON.parseObject(params);
         try {
             headers.put("sign", SignUtil.signTopRequest(jsonObject, secret, token, SignUtil.SIGN_METHOD_MD5,timestamp));
@@ -133,9 +136,13 @@ public class DataCentralService {
         HttpResponse response = request.execute();
         if(response.isOk()){
             AppTokenResult result = JSONObject.parseObject(response.body(), AppTokenResult.class);
+            if(result.getCode() != 0){
+                throw new BizException(ResultCode.ERROR.getCode(), "获取中台token异常！");
+            }
             return result.getToken();
         }else{
             throw new BizException(ResultCode.ERROR.getCode(), "获取中台token异常！");
         }
     }
 }
+

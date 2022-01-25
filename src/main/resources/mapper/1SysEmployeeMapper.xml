@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.phenom.web.mapper.SysEmployeeMapper">
+
+    <resultMap id="baseResult" type="com.phenom.web.domain.vo.SysEmployeeVo" >
+        <id property="id" column="id"/>
+        <result property="userName" column="user_name"/>
+        <result property="empCode" column="emp_code"/>
+        <result property="empName" column="emp_name"/>
+        <result property="sex" column="sex"/>
+        <result property="phone" column="phone"/>
+        <result property="email" column="email"/>
+        <result property="report" column="report"/>
+        <result property="status" column="emp_status"/>
+        <result property="positionCode" column="position_code"/>
+        <result property="positionName" column="position_name"/>
+        <result property="rankId" column="rank_id"/>
+        <result property="rankName" column="rank_name"/>
+        <result property="orgId" column="org_id"/>
+        <result property="orgName" column="org_name"/>
+    </resultMap>
+
+    <select id="selectSysEmpByUserName" parameterType="String" resultMap="baseResult" >
+        select id,user_name, emp_code, emp_name, sex, phone, email, report, emp_status, position_code, position_name,
+        rank_id, rank_name, org_id, org_name from sys_employee
+        where user_name = #{userName, jdbcType=VARCHAR}
+</select>
+
+    <select id="selectSysEmpList" parameterType="com.phenom.web.domain.bo.SysEmployeeBo" resultMap="baseResult">
+        select id,user_name, emp_code, emp_name, sex, phone, email, report, emp_status, position_code, position_name,
+        rank_id, rank_name, org_id, org_name from sys_employee
+        <where>
+            emp_status = 1 and is_deleted = 0
+            <if test="userName != null">and user_name = #{userName, jdbcType = VARCHAR}</if>
+            <if test="empCode != null">and emp_code = #{empCode, jdbcType = VARCHAR}</if>
+            <if test="empName != null and empName != ''">and emp_name like concat('%', #{empName, jdbcType = VARCHAR}, '%')</if>
+            <if test="sex != null">and sex = #{sex, jdbcType = TINYINT}</if>
+            <if test="phone != null">and phone = #{phone, jdbcType = VARCHAR}</if>
+            <if test="email != null">and email = #{email, jdbcType = VARCHAR}</if>
+            <if test="report != null">and report = #{report, jdbcType = VARCHAR}</if>
+            <if test="status != null">and emp_status = #{status, jdbcType = TINYINT}</if>
+            <if test="positionCode != null">and position_code = #{positionCode, jdbcType = VARCHAR}</if>
+            <if test="positionName != null">and position_name = #{positionName, jdbcType = VARCHAR}</if>
+            <if test="rankId != null">and rank_id = #{rankId, jdbcType = VARCHAR}</if>
+            <if test="rankName != null">and rank_name = #{rankName, jdbcType = VARCHAR}</if>
+            <if test="orgId != null">and org_id = #{orgId, jdbcType = VARCHAR}</if>
+            <if test="orgName != null">and org_name = #{orgName, jdbcType = VARCHAR}</if>
+            <if test="searchValue != null and searchValue != ''">and (emp_code like concat('%', #{searchValue, jdbcType = VARCHAR}, '%')) or (emp_name like concat('%', #{searchValue, jdbcType = VARCHAR}, '%'))</if>
+        </where>
+    </select>
+
+    <insert id="insertSysEmp" parameterType="com.phenom.web.domain.SysEmployee" useGeneratedKeys="true" keyProperty="id">
+        insert into sys_employee
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="userName != null">user_name,</if>
+            <if test="empCode != null">emp_code,</if>
+            <if test="empName != null">emp_name,</if>
+            <if test="sex != null">sex,</if>
+            <if test="phone != null">phone,</if>
+            <if test="email != null">email,</if>
+            <if test="report != null">report,</if>
+            <if test="status != null">emp_status,</if>
+            <if test="positionCode != null">position_code,</if>
+            <if test="positionName != null">position_name,</if>
+            <if test="rankId != null">rank_id,</if>
+            <if test="rankName != null">rank_name,</if>
+            <if test="orgId != null">org_id,</if>
+            <if test="orgName != null">org_name,</if>
+            <if test="remark != null">remark,</if>
+            <if test="createBy != null">created_by,</if>
+            <if test="updateBy != null">updated_by,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="userName != null">#{userName},</if>
+            <if test="empCode != null">#{empCode},</if>
+            <if test="empName != null">#{empName},</if>
+            <if test="sex != null">#{sex},</if>
+            <if test="phone != null">#{phone},</if>
+            <if test="email != null">#{email},</if>
+            <if test="report != null">#{report},</if>
+            <if test="status != null">#{status},</if>
+            <if test="positionCode != null">#{positionCode},</if>
+            <if test="positionName != null">#{positionName},</if>
+            <if test="rankId != null">#{rankId},</if>
+            <if test="rankName != null">#{rankName},</if>
+            <if test="orgId != null">#{orgId},</if>
+            <if test="orgName != null">#{orgName},</if>
+            <if test="remark != null">#{remark},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+        </trim>
+    </insert>
+
+    <update id="updateSysEmpById" parameterType="com.phenom.web.domain.SysEmployee">
+        update sys_employee
+        <set>
+            <if test="userName != null">user_name = #{userName},</if>
+            <if test="empCode != null">emp_code = #{empCode},</if>
+            <if test="empName != null">emp_name = #{empName},</if>
+            <if test="sex != null">sex = #{sex},</if>
+            <if test="phone != null">phone = #{phone},</if>
+            <if test="email != null">email = #{email},</if>
+            <if test="report != null">report = #{report},</if>
+            <if test="status != null">emp_status = #{status},</if>
+            <if test="positionCode != null">position_code = #{positionCode},</if>
+            <if test="positionName != null">position_name = #{positionName},</if>
+            <if test="rankId != null">rank_id = #{rankId},</if>
+            <if test="rankName != null">rank_name = #{rankName},</if>
+            <if test="orgId != null">org_id = #{orgId},</if>
+            <if test="orgName != null">org_name = #{orgName},</if>
+            <if test="remark != null">remark = #{remark},</if>
+            <if test="updateBy != null">updated_by = #{updateBy},</if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <insert id="batchInsertSysEmp" parameterType="com.phenom.web.domain.SysEmployee">
+        insert into sys_employee (user_name, emp_code, emp_name, sex, phone, email, report, emp_status, position_code, position_name,
+        rank_id, rank_name, org_id, org_name, remark, created_by, updated_by) values
+        <if test="list != null and list.size() > 0">
+            <foreach collection="list" item="sysEmp" separator="," >
+                <trim prefix="(" suffix=")" suffixOverrides=",">
+                    #{sysEmp.userName, jdbcType = VARCHAR},
+                    #{sysEmp.empCode, jdbcType = VARCHAR},
+                    #{sysEmp.empName, jdbcType = VARCHAR},
+                    #{sysEmp.sex, jdbcType = TINYINT},
+                    #{sysEmp.phone, jdbcType = VARCHAR},
+                    #{sysEmp.email, jdbcType = VARCHAR},
+                    #{sysEmp.report, jdbcType = VARCHAR},
+                    #{sysEmp.status, jdbcType = TINYINT},
+                    #{sysEmp.positionCode, jdbcType = VARCHAR},
+                    #{sysEmp.positionName, jdbcType = VARCHAR},
+                    #{sysEmp.rankId, jdbcType = VARCHAR},
+                    #{sysEmp.rankName, jdbcType = VARCHAR},
+                    #{sysEmp.orgId, jdbcType = VARCHAR},
+                    #{sysEmp.orgName, jdbcType = VARCHAR},
+                    #{sysEmp.remark, jdbcType = VARCHAR},
+                    #{sysEmp.createBy, jdbcType = VARCHAR},
+                    #{sysEmp.updateBy, jdbcType = VARCHAR}
+                </trim>
+            </foreach>
+            on duplicate key update
+            emp_code = values(emp_code),
+            emp_name = values(emp_name),
+            sex = values(sex),
+            phone = values(phone),
+            email = values(email),
+            report = values(report),
+            emp_status = values(emp_status),
+            position_code = values(position_code),
+            position_name = values(position_name),
+            rank_id = values(rank_id),
+            rank_name = values(rank_name),
+            org_id = values(org_id),
+            remark = values(remark),
+            created_by = values(created_by),
+            updated_by = values(updated_by)
+        </if>
+    </insert>
+</mapper>
