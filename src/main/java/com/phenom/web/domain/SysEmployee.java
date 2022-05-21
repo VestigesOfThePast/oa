@@ -1,6 +1,5 @@
 package com.phenom.web.domain;
 import lombok.Data;
-import java.io.Serializable;
 
 /**
  * 员工模型
@@ -8,9 +7,7 @@ import java.io.Serializable;
  * @date 2022/1/251:01 下午
  */
 @Data
-public class SysEmployee extends BaseEntity implements Serializable {
-
-    private static final long serialVersionUID = -1L;
+public class SysEmployee extends BaseEntity{
 
     /** 员工id */
     private Long id;

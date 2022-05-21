@@ -2,9 +2,10 @@ package com.phenom.web.task;
 
 import com.phenom.web.service.impl.DataCentralService;
 import com.xxl.job.core.biz.model.ReturnT;
+import com.xxl.job.core.context.XxlJobHelper;
 import com.xxl.job.core.handler.annotation.XxlJob;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Controller;
 
 import javax.annotation.Resource;
 import java.text.SimpleDateFormat;
@@ -16,7 +17,7 @@ import java.text.SimpleDateFormat;
  * @Date: 2022/1/24
  */
 @Slf4j
-@Component
+@Controller
 public class SyncDataCentralTask {
 
     @Resource
@@ -27,12 +28,13 @@ public class SyncDataCentralTask {
 
     /**
      * 同步中台员工数据
-     * @param param
      * @return
      */
     @XxlJob("syncEmployeeInfo")
-    public ReturnT<String> syncEmpInfoJobHandler(String param){
+    public ReturnT<String> syncEmpInfoJobHandler(){
         log.info("-----人员信息同步开始--------");
+        // 获取参数
+        String param = XxlJobHelper.getJobParam();
         try {
             dataCentralService.syncEmpInfo(null);
         } catch (Exception e) {

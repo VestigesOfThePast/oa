@@ -7,7 +7,28 @@ spring:
       url: jdbc:mysql://10.0.3.5:36895/wop_sit?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=true&serverTimezone=GMT%2B8
       username: wop_sit
       password: wRbQvStlyiHy1PS
-
+  # redis 配置
+  redis:
+    # 地址
+    host: 127.0.0.1
+    # 端口，默认为6379
+    port: 6379
+    # 密码
+#    password: 123456
+    database: 6
+    # 连接超时时间
+    timeout: 10s
+    # jedis或者lettuce
+    lettuce:
+      pool:
+        # 连接池中的最小空闲连接
+        min-idle: 0
+        # 连接池中的最大空闲连接
+        max-idle: 8
+        # 连接池的最大数据库连接数
+        max-active: 8
+        # 连接池最大阻塞等待时间（使用负值表示没有限制）
+        max-wait: -1ms
 
 #中台账户查询接口
 dataCentral:
@@ -25,17 +46,19 @@ dataCentral:
 xxl:
   job:
     #与调度中心的通讯校验token,测试环境固定为test
-    accessToken: test
+    accessToken:
     admin:
       #调度中心地址,外网地址:http://42.193.185.57:8010/xxl-job-admin;内网地址:http://10.0.3.14:8010/xxl-job-admin
-      addresses: http://10.0.5.75:31115/xxl-job-admin
+      addresses: http://127.0.0.1:8080/xxl-job-admin
     executor:
       #应用名,与自身应用一致即可,后续在调度中心需要用到改应用名.
       appname: phenom
       # ip:
       #通讯端口:默认端口9999,可自行配置,与应用端口区分开即可.
-      port: 9998
+      port: 9988
       #xxl-job调度日志保存路径
       logpath: logs/xxl-job/
       #日志保留天数
       logretentiondays: 15
+
+
