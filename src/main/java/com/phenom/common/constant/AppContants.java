@@ -24,7 +24,7 @@ public class AppContants {
     /** 保护模式key(验证码) */
     public static final String IP_PROTECT_CODE_KEY = "phone:code:";
     /** 保护模式过期时间(验证码) */
-    public static final long IP_PROTECT_CODE_EXPIRE = 5;
+    public static final long IP_PROTECT_CODE_EXPIRE = 60;
     /** 锁定ip(验证码) */
     public static final String IP_LOCK_CODE_KEY = "phone:code:lock";
     /** 锁定ip过期时间(验证码) */
