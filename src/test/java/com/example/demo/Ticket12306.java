@@ -33,7 +33,7 @@ public class Ticket12306 implements Runnable{
     public void run() {
         while (true){
             try {
-                //获取锁
+                //获取锁。未获取到则一直尝试获取。锁释放后，客户端再次尝试获取锁时，会创建新的临时节点
                 lock.acquire(3, TimeUnit.SECONDS);  //参数指明没拿到锁要等多久
                 if (ticket > 0){
                     System.out.println(Thread.currentThread() + "==" + ticket);
@@ -42,7 +42,7 @@ public class Ticket12306 implements Runnable{
             } catch (Exception e) {
                 e.printStackTrace();
             } finally {
-                //释放锁
+                //释放锁。
                 try {
                     lock.release();
                 } catch (Exception e) {
