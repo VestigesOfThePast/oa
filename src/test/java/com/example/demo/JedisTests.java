@@ -9,7 +9,11 @@ import redis.clients.jedis.Jedis;
 import java.util.List;
 import java.util.Set;
 
-
+/**
+ * @author olic
+ * @date 2022/6/2814:25
+ * @描述 Redis客户端
+ */
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = JedisTests.class)
 public class JedisTests {
