@@ -1,6 +1,6 @@
 package com.phenom;
 
-import org.springframework.boot.SpringApplication;
+import com.phenom.swingview.window.LoginFrame;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 /**
@@ -13,7 +13,6 @@ public class PhenomApplication
 {
     public static void main(String[] args)
     {
-        SpringApplication.run(PhenomApplication.class, args);
+        new LoginFrame().start();
     }
-
 }

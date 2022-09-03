@@ -19,7 +19,7 @@
            stdout将日志信息输出到控制上，为方便开发测试使用
     -->
 
-    <contextName>esp_fdd</contextName>
+    <contextName>qh_phenom</contextName>
     <!-- 日志记录器，日期滚动记录 -->
     <property name="LOG_PATH" value="./logs" />
     <!--设置系统日志目录-->
@@ -151,6 +151,18 @@
         </filter>-->
     </appender>
 
+    <appender name="rpaExeConsoleAppender" class="com.phenom.swingview.config.RpaExeConsoleAppender">
+        <!--encoder 默认配置为PatternLayoutEncoder-->
+        <encoder>
+            <pattern>${CONSOLE_LOG_PATTERN}</pattern>
+            <charset>utf-8</charset>
+        </encoder>
+        <!--此日志appender是为开发使用，只配置最底级别，控制台输出的日志级别是大于或等于此级别的日志信息-->
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>INFO</level>
+        </filter>
+    </appender>
+
     <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
         <!--encoder 默认配置为PatternLayoutEncoder-->
         <encoder>
@@ -184,6 +196,7 @@
             <appender-ref ref="FILEINFO" />
             <appender-ref ref="FILEALL" />
             <appender-ref ref="STDOUT"/>
+            <appender-ref ref="rpaExeConsoleAppender"/>
         </root>
     </springProfile>
 
