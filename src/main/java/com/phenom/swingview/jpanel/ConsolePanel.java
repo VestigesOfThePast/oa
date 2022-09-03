@@ -53,7 +53,6 @@ public class ConsolePanel extends JPanel {
     public static JPanel getCenterPanel(){
         JPanel panelCenter = new JPanel();
         panelCenter.setLayout(new GridLayout(1,1));
-//        JTextArea jTextArea = new JTextArea(15, 60);
         //每次光标显示到最下面一行
         jTextArea.setCaretPosition(jTextArea.getText().length());
         //激活自动换行功能。根据jTextArea宽度自动换行
@@ -66,25 +65,6 @@ public class ConsolePanel extends JPanel {
         jTextArea.setBackground(new Color(0, 0, 0));
         jTextArea.setFont(new Font("华文行楷", Font.PLAIN, 15));
         jTextArea.setForeground(UIConstant.COLOR_NINE);
-
-//        // 子线程开始从流中读取数据
-//        Thread thread = new Thread(() -> {
-//            String line = null;
-//            while (true) {
-//                try {
-//                    //控制台日志超过1000行刷新
-//                    if(jTextArea.getLineCount() > 1000){
-//                        jTextArea.setText("");
-//                    }
-//                    line = RpaExeConsoleAppender.bufferedReader.readLine();
-//                    jTextArea.append(line+"\n");
-//                } catch (IOException e) {
-//                }
-//            }
-//        });
-//        thread.setDaemon(Boolean.TRUE);
-//        thread.setName("console-log");
-//        thread.start();
 
         //水平方向不滚动，竖直方向滚动
         JScrollPane areaJP = new JScrollPane(jTextArea,ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED,ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);

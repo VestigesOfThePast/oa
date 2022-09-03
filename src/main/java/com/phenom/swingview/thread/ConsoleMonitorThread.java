@@ -32,25 +32,27 @@ public class ConsoleMonitorThread{
                         while (true) {
                             try {
                                 //控制台日志超过1000行刷新
-                                if(ConsolePanel.jTextArea.getLineCount() > 1000){
+                                if(ConsolePanel.jTextArea.getLineCount() > 500){
                                     ConsolePanel.jTextArea.setText("");
                                 }
                                 line = RpaExeConsoleAppender.bufferedReader.readLine();
                                 ConsolePanel.jTextArea.append(line+"\n");
+                                //滚动条自动滚到最底部
+                                ConsolePanel.jTextArea.setCaretPosition(ConsolePanel.jTextArea.getText().length());
                             } catch (IOException e) {
-                                System.out.println(e.toString());
+                                logger.error("rpaExe 控制台日志写入失败");
                             }
                         }
                     } catch (Exception e) {
                         if (!toStop) {
-                            logger.error(">>>>>>>>>>> rpaExe, log monitor thread error:{}", e);
+                            logger.error(">>>>>>>>>>> rpaExe, console log monitor thread error:{}", e);
                         }
                     }
                 }
-                logger.info(">>>>>>>>>>> rpaExe, log monitor thread stop");
+                logger.info(">>>>>>>>>>> rpaExe, console log monitor thread stop");
             }
         });
-        monitorThread.setName("rpaExe, log monitor ConsoleMonitorThread");
+        monitorThread.setName("rpaExe, console log monitor ConsoleMonitorThread");
         monitorThread.start();
     }
 
