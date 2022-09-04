@@ -1,7 +1,7 @@
 package com.phenom.swingview.window;
 
 import com.phenom.PhenomApplication;
-import com.phenom.swingview.constant.UIConstant;
+import com.phenom.swingview.constant.ExeConstant;
 import com.phenom.swingview.eventlistener.ListenerUtil;
 import com.phenom.swingview.jpanel.LoginPanel;
 import org.springframework.boot.SpringApplication;
@@ -35,12 +35,12 @@ public class LoginFrame extends JFrame {
      * 初始化窗体
      */
     public void init(){
-        setTitle(UIConstant.LOGIN_WINDOW_TITLE);
+        setTitle(ExeConstant.LOGIN_WINDOW_TITLE);
         //设置窗体禁止调整大小
         setResizable(false);
         //设置主窗体位置、大小
-        setBounds(UIConstant.getLoginWindowX(),UIConstant.getLoginWindowwY(),UIConstant.LOGIN_WINDOW_WIDTH,
-                UIConstant.LOGIN_WINDOW_HEIGHT);
+        setBounds(ExeConstant.getLoginWindowX(), ExeConstant.getLoginWindowwY(), ExeConstant.LOGIN_WINDOW_WIDTH,
+                ExeConstant.LOGIN_WINDOW_HEIGHT);
         //无任何操作(不隐藏窗体也不停止程序)
         setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
     }
@@ -50,7 +50,7 @@ public class LoginFrame extends JFrame {
      */
     public void addComponent(){
         Container c = getContentPane();
-        c.setBackground(UIConstant.COLOR_TWO);
+        c.setBackground(ExeConstant.COLOR_TWO);
         c.setLayout(new GridLayout(1,1));
         c.add(new LoginPanel(this));
     }

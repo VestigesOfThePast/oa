@@ -1,6 +1,6 @@
 package com.phenom.swingview.jpanel;
 
-import com.phenom.swingview.constant.UIConstant;
+import com.phenom.swingview.constant.ExeConstant;
 import com.phenom.swingview.window.*;
 import javax.swing.*;
 import java.awt.*;
@@ -22,7 +22,7 @@ public class TaskListPanel extends JPanel {
      * 初始化panel
      */
     private void init() {
-        setBackground(UIConstant.COLOR_ONE);
+        setBackground(ExeConstant.COLOR_ONE);
         setLayout(new BorderLayout());
     }
 
@@ -40,9 +40,9 @@ public class TaskListPanel extends JPanel {
 //     */
 //    public static JPanel getUpPanel() {
 //        JPanel panelUp = new JPanel();
-//        panelUp.setBackground(UIConstant.COLOR_FOUR);
+//        panelUp.setBackground(ExeConstant.COLOR_FOUR);
 //        panelUp.setLayout(new FlowLayout(FlowLayout.CENTER, 25, 5));
-//        JLabel labelTitle = new JLabel(UIConstant.TASK_LIST_PANEL_TITLE);
+//        JLabel labelTitle = new JLabel(ExeConstant.TASK_LIST_PANEL_TITLE);
 //        labelTitle.setFont(new Font("宋体", Font.BOLD, 25));
 //        panelUp.add(labelTitle);
 //        return panelUp;
@@ -57,8 +57,8 @@ public class TaskListPanel extends JPanel {
         JPanel panelCenter = new JPanel();
         panelCenter.setLayout(new GridLayout(1,1));
         JList<String> jList = new JList<>();
-        jList.setBackground(UIConstant.COLOR_TWO);
-        jList.setFixedCellHeight(UIConstant.TASK_LIST_PANEL_ROW_GAP);
+        jList.setBackground(ExeConstant.COLOR_TWO);
+        jList.setFixedCellHeight(ExeConstant.TASK_LIST_PANEL_ROW_GAP);
         //多选模式
         jList.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
         String[] itemL = {"任务1","任务2","任务3","任务4","任务5","任务6","任务7","任务8","任务9","任务10"};
@@ -71,9 +71,9 @@ public class TaskListPanel extends JPanel {
         //添加鼠标双击事件
         jList.addMouseListener(new MouseAdapter(){
             public void mouseClicked(MouseEvent e){
-                if(e.getClickCount()==2){	//When double click JList
-                    new TaskLogFrame(jFrame);
-                }
+            if(e.getClickCount()==2){
+                new TaskLogFrame(jFrame);
+            }
             }
         });
         JScrollPane listJP = new JScrollPane();

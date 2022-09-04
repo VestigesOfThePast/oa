@@ -1,6 +1,7 @@
 package com.phenom.swingview.window;
 
-import com.phenom.swingview.constant.UIConstant;
+import com.phenom.swingview.constant.ExeConstant;
+import com.phenom.swingview.jpanel.TaskLogPanel;
 import javax.swing.*;
 import java.awt.*;
 
@@ -25,12 +26,12 @@ public class TaskLogFrame extends JDialog {
      * 初始化容器
      */
     public void init(){
-        setTitle(UIConstant.TASK_LOG_WINDOW_TITLE);
+        setTitle(ExeConstant.TASK_LOG_WINDOW_TITLE);
         //设置窗体禁止调整大小
         setResizable(false);
         //设置主窗体位置、大小
-        setBounds(UIConstant.getTaskLogWindowX(),UIConstant.getTaskLogWindowY(),UIConstant.TASK_LOG_WINDOW_WIDTH,
-                UIConstant.TASK_LOG_WINDOW_HEIGHT);
+        setBounds(ExeConstant.getTaskLogWindowX(), ExeConstant.getTaskLogWindowY(), ExeConstant.TASK_LOG_WINDOW_WIDTH,
+                ExeConstant.TASK_LOG_WINDOW_HEIGHT);
     }
 
     /**
@@ -38,8 +39,8 @@ public class TaskLogFrame extends JDialog {
      */
     public void addComponent(){
         Container c = getContentPane();
-        c.setBackground(UIConstant.COLOR_ONE);
+        c.setBackground(ExeConstant.COLOR_ONE);
         c.setLayout(new BorderLayout());
-//        c.add()
+        c.add(new TaskLogPanel());
     }
 }

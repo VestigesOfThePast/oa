@@ -1,6 +1,6 @@
 package com.phenom.swingview.jpanel;
 
-import com.phenom.swingview.constant.UIConstant;
+import com.phenom.swingview.constant.ExeConstant;
 import com.phenom.swingview.window.*;
 import javax.swing.*;
 import java.awt.*;
@@ -19,7 +19,7 @@ public class LoginPanel extends JPanel {
     }
 
     public void init(){
-        setBackground(UIConstant.COLOR_ONE);
+        setBackground(ExeConstant.COLOR_ONE);
         setLayout(new BorderLayout());
     }
 
@@ -40,9 +40,9 @@ public class LoginPanel extends JPanel {
         JPanel panelUp = new JPanel();
         panelUp.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 20));
         JLabel jLabelImg = new JLabel();
-        Icon icon = new ImageIcon(UIConstant.LOGIN_PANEL_LOGO_TIPS);
+        Icon icon = new ImageIcon(ExeConstant.LOGIN_PANEL_LOGO_TIPS);
         jLabelImg.setIcon(icon);
-        JLabel labelUpTip = new JLabel(UIConstant.LOGIN_PANEL_UP_TIPS);
+        JLabel labelUpTip = new JLabel(ExeConstant.LOGIN_PANEL_UP_TIPS);
         labelUpTip.setFont(new Font("楷体", Font.PLAIN, 15));
         panelUp.add(jLabelImg);
         panelUp.add(labelUpTip);
@@ -77,7 +77,7 @@ public class LoginPanel extends JPanel {
     public JPanel getDownPanel(){
         JPanel panelDown = new JPanel();
         panelDown.setLayout(new FlowLayout(FlowLayout.CENTER, 0, 30));
-        JLabel labelDownTip = new JLabel(UIConstant.LOGIN_PANEL_DOWN_TIPS);
+        JLabel labelDownTip = new JLabel(ExeConstant.LOGIN_PANEL_DOWN_TIPS);
         labelDownTip.setFont(new Font("楷体", Font.PLAIN, 15));
         panelDown.add(labelDownTip);
         return panelDown;

@@ -6,7 +6,7 @@ import java.awt.*;
  * @author olic
  * @date 2022/8/2911:04
  */
-public class UIConstant {
+public class ExeConstant {
 
     /**
      * 软件名称,版本
@@ -21,40 +21,7 @@ public class UIConstant {
     public final static String confirmDoWork = "是否执行任务？";
     public final static String workStoped = "任务已经停止";
 
-
     static Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-    /**
-     * 主窗口大小
-     */
-    public final static int MAIN_WINDOW_X = getMainWindowX();
-    public final static int MAIN_WINDOW_Y = getMainWindowY();
-
-    public final static int MAIN_WINDOW_MIN_WIDTH = 1200;
-    public final static int MAIN_WINDOW_MIN_HEIGHT = 900;
-
-    /*工具栏宽高度*/
-    public final static int TOOL_BAR_WIDTH = 385;
-
-    public final static int TOOL_BAR_STATUS_HEIGHT = 54;
-//    public final static int TOOL_BAR_HEIGHT = getToolBarHeight();
-
-//    private static int getToolBarHeight() {
-//        if(Objects.isNull(Rpa.mainFrame)){
-//            return 900;
-//        }
-//        return MainFrame.mainFrame.getHeight();
-//    }
-
-//    private static int getToolBarWidth() {
-//        return MainFrame.mainFrame.getWidth() / 5;
-//    }
-
-    /*工具栏宽高度*/
-    public final static int border_width_full = 10;
-    /*工具栏宽高度*/
-    public final static int border_width_half = 5;
-    /*工具栏宽高度*/
-    public final static int border_width_zore = 0;
 
     /**
      * 系统当前路径
@@ -66,14 +33,6 @@ public class UIConstant {
      */
     public final static int JProgressBar_Height = 300;
     public final static int console_Height = 500;
-//    public final static int control_container_width = MAIN_WINDOW_WIDTH - TOOL_BAR_WIDTH;
-
-
-//    /**
-//     * 主窗口图标
-//     */
-//    public final static Image IMAGE_ICON = Toolkit.getDefaultToolkit()
-//            .getImage(getImageResource("/icon/titIcon.png"));
 
     /**
      * 颜色一
@@ -113,7 +72,7 @@ public class UIConstant {
     public final static Color COLOR_NINE = new Color(187,187,187);
 
     /**
-     * 菜单枚举
+     * 功能菜单枚举
      */
     public enum MenuEnum{
         HOST_INFO("host_info","主机信息"),
@@ -146,44 +105,6 @@ public class UIConstant {
         }
     }
 
-    /**
-     * 主窗口背景色
-     */
-    public final static Color MAIN_BACK_COLOR = new Color(255, 255, 255);
-    /**
-     * 工具栏背景色
-     */
-    public final static Color TOOL_BAR_BACK_COLOR = new Color(245, 245, 245);
-    /**
-     * 表格线条背景色
-     */
-    public final static Color TABLE_LINE_COLOR = new Color(225, 225, 225);
-
-    // 工具栏图标
-//    /**
-//     * 状态 默认
-//     */
-//    public final static ImageIcon ICON_STATUS = new ImageIcon(
-//            getImageResource("/icon/status.png"));
-//    /**
-//     * 状态 激活
-//     */
-//    public final static ImageIcon ICON_STATUS_ENABLE = new ImageIcon(
-//            getImageResource("/icon/statusEnable.png"));
-
-//    /**
-//     * 工具节点树
-//     */
-//    public final static ImageIcon IMAGE_ICON_TREE_PERSENT = new ImageIcon(getImageResource("/icon/worknode.png"));
-//
-//    /**
-//     * 工具节点叶子
-//     */
-//    public final static ImageIcon IMAGE_ICON_TREE_Child = new ImageIcon(getImageResource("/icon/workleaf.png"));
-
-//    private static URL getImageResource(String s) {
-//        return RpaApplication.class.getResource(s);
-//    }
 
     // 主窗体
     /** 主窗体-宽度 */
@@ -214,15 +135,7 @@ public class UIConstant {
 
 
     //执行器信息窗体
-    /** 主窗体-宽度 */
-    public final static int EXE_INFO_WINDOW_WIDTH = (int) (screenSize.getWidth()/2.5);
-    /** 主窗体-高度 */
-    public final static int EXE_INFO_WINDOW_HEIGHT = (int) (screenSize.getHeight()/2.5);
-    /** 主窗体-X坐标 */
-    public static int getExeInfoWindowX() { return screenSize.width / 2 - MAIN_WINDOW_WIDTH / 3; }
-    /** 主窗体-Y坐标 */
-    public static int getExeInfoWindowY() { return screenSize.height / 2 - MAIN_WINDOW_HEIGHT / 3;}
-    /** 主窗体-title */
+    /** 执行器信息窗体-title */
     public final static String EXE_INFO_WINDOW_TITLE = "主机信息";
 
     //任务日志窗体
@@ -246,7 +159,8 @@ public class UIConstant {
 
     // 控制台模块
     /** 控制台模块-title */
-    public final static String CONTROL_PANEL_TITLE = "控制台";
+    public final static String CONSOLE_PANEL_TITLE = "控制台";
+    public final static int CONSOLE_LOG_MAX_NUM = 500;
 
     // 执行器信息模块
     /** 执行器信息-log抬头*/
@@ -261,32 +175,5 @@ public class UIConstant {
     public final static String LOGIN_PANEL_DOWN_TIPS = "仅支持君润企业微信账号扫码登录";
     /** 登录模块-企微小图标 */
     public final static String LOGIN_PANEL_LOGO_TIPS = "src/main/java/com/phenom/swingview/img/qwcon.png";
-
-
-    // 样式布局相关
-    /**
-     * 主面板水平间隔
-     */
-    public final static int MAIN_H_GAP = 25;
-    /**
-     * 主面板Label 大小
-     */
-    public final static Dimension LABLE_SIZE = new Dimension(1300, 30);
-    /**
-     * Item Label 大小
-     */
-    public final static Dimension LABLE_SIZE_ITEM = new Dimension(78, 30);
-    /**
-     * Item text field 大小
-     */
-    public final static Dimension TEXT_FIELD_SIZE_ITEM = new Dimension(400, 24);
-    /**
-     * radio 大小
-     */
-    public final static Dimension RADIO_SIZE = new Dimension(1300, 60);
-    /**
-     * 高级选项面板Item 大小
-     */
-    public final static Dimension PANEL_ITEM_SIZE = new Dimension(1300, 40);
 
 }

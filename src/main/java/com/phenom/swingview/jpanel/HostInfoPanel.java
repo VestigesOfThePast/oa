@@ -1,6 +1,6 @@
 package com.phenom.swingview.jpanel;
 
-import com.phenom.swingview.constant.UIConstant;
+import com.phenom.swingview.constant.ExeConstant;
 import com.sun.management.OperatingSystemMXBean;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -26,7 +26,7 @@ public class HostInfoPanel extends JPanel {
     public void init(){
         //设置边界模式下指定区域的大小
         setPreferredSize(new Dimension(150, 150));
-        setBackground(UIConstant.COLOR_ONE);
+        setBackground(ExeConstant.COLOR_ONE);
         setLayout(new BorderLayout());
     }
 
@@ -66,7 +66,7 @@ public class HostInfoPanel extends JPanel {
                 new Object[]{"内存" , memory},
                 new Object[]{"IPV4地址" , "ip"},
                 new Object[]{"HOME目录" , homeDir},
-                new Object[]{"客户端项目版本", "1.4"}
+                new Object[]{"客户端版本", "1.4"}
         };
         //以二维数组和一维数组来创建一个JTable对象
         JTable table = new JTable(tableData,columnTitle){
@@ -76,10 +76,10 @@ public class HostInfoPanel extends JPanel {
             }
         };
         table.setRowHeight(45);
-        table.setBackground(UIConstant.COLOR_SEVEN);
+        table.setBackground(ExeConstant.COLOR_SEVEN);
         table.setRowSelectionAllowed(true);
         //设置选中行颜色
-        table.setSelectionBackground(UIConstant.COLOR_SIX);
+        table.setSelectionBackground(ExeConstant.COLOR_SIX);
         //保证每次只选中一行
         table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         table.setSize(700, 400);
@@ -88,11 +88,11 @@ public class HostInfoPanel extends JPanel {
         table.getColumnModel().getColumn(0).setPreferredWidth(250);
         //设置表头颜色
         DefaultTableCellRenderer cellRenderer = new DefaultTableCellRenderer();
-        cellRenderer.setBackground(UIConstant.COLOR_EIGHT);
+        cellRenderer.setBackground(ExeConstant.COLOR_EIGHT);
         cellRenderer.setFont(new Font("宋体",Font.BOLD,16));
         table.getColumnModel().getColumn(0).setCellRenderer(cellRenderer);
         DefaultTableCellRenderer cellRenderer1 = new DefaultTableCellRenderer();
-        cellRenderer1.setBackground(UIConstant.COLOR_ONE);
+        cellRenderer1.setBackground(ExeConstant.COLOR_ONE);
         //内容居中
         cellRenderer1.setHorizontalAlignment(SwingConstants.CENTER);
         //设置第二列宽度为120

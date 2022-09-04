@@ -1,6 +1,7 @@
 package com.phenom.swingview.thread;
 
 import com.phenom.swingview.config.RpaExeConsoleAppender;
+import com.phenom.swingview.constant.ExeConstant;
 import com.phenom.swingview.jpanel.ConsolePanel;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -15,6 +16,7 @@ public class ConsoleMonitorThread{
 
     private static Logger logger = LoggerFactory.getLogger(ConsoleMonitorThread.class);
     private static ConsoleMonitorThread instance = new ConsoleMonitorThread();
+
     public static ConsoleMonitorThread getInstance(){
         return instance;
     }
@@ -30,7 +32,7 @@ public class ConsoleMonitorThread{
                     try{
                         String line = null;
                         //控制台日志超过1000行刷新
-                        if(ConsolePanel.jTextArea.getLineCount() > 500){
+                        if(ConsolePanel.jTextArea.getLineCount() > ExeConstant.CONSOLE_LOG_MAX_NUM){
                             ConsolePanel.jTextArea.setText("");
                         }
                         line = RpaExeConsoleAppender.bufferedReader.readLine();

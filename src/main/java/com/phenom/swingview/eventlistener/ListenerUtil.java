@@ -1,6 +1,6 @@
 package com.phenom.swingview.eventlistener;
 
-import com.phenom.swingview.constant.UIConstant;
+import com.phenom.swingview.constant.ExeConstant;
 import javax.swing.*;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
@@ -20,7 +20,7 @@ public class ListenerUtil {
         jFrame.addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
-                int m = JOptionPane.showConfirmDialog(jFrame, UIConstant.CLOSE_ALERT_MESSAGE, UIConstant.ALERTTEXT, JOptionPane.YES_NO_OPTION);
+                int m = JOptionPane.showConfirmDialog(jFrame, ExeConstant.CLOSE_ALERT_MESSAGE, ExeConstant.ALERTTEXT, JOptionPane.YES_NO_OPTION);
                 if (m==JOptionPane.OK_OPTION) {
                     System.exit(0);
                 }

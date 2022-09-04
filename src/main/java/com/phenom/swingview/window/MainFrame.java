@@ -1,6 +1,6 @@
 package com.phenom.swingview.window;
 
-import com.phenom.swingview.constant.UIConstant;
+import com.phenom.swingview.constant.ExeConstant;
 import com.phenom.swingview.eventlistener.ListenerUtil;
 import com.phenom.swingview.jpanel.ExeInfoPanel;
 import com.phenom.swingview.jpanel.HostInfoPanel;
@@ -27,12 +27,12 @@ public class MainFrame extends JFrame {
      * 初始化容器
      */
     public void init(){
-        setTitle(UIConstant.MAIN_WINDOW_TITLE);
+        setTitle(ExeConstant.MAIN_WINDOW_TITLE);
         //设置窗体禁止调整大小
         setResizable(false);
         //设置主窗体位置、大小
-        setBounds(UIConstant.getMainWindowX(),UIConstant.getMainWindowY(),UIConstant.MAIN_WINDOW_WIDTH,
-                UIConstant.MAIN_WINDOW_HEIGHT);
+        setBounds(ExeConstant.getMainWindowX(), ExeConstant.getMainWindowY(), ExeConstant.MAIN_WINDOW_WIDTH,
+                ExeConstant.MAIN_WINDOW_HEIGHT);
         //无任何操作(不隐藏窗体也不停止程序)
         setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
     }
@@ -42,7 +42,7 @@ public class MainFrame extends JFrame {
      */
     public void addComponent(){
         Container c = getContentPane();
-        c.setBackground(UIConstant.COLOR_TWO);
+        c.setBackground(ExeConstant.COLOR_TWO);
         c.setLayout(new BorderLayout());
         c.add(new ExeInfoPanel(this), BorderLayout.WEST);
         //默认加载主机信息panel
