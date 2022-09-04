@@ -2,7 +2,7 @@ package com.phenom.swingview.window;
 
 import com.phenom.PhenomApplication;
 import com.phenom.swingview.constant.ExeConstant;
-import com.phenom.swingview.eventlistener.ListenerUtil;
+import com.phenom.swingview.eventlistener.ExeListener;
 import com.phenom.swingview.jpanel.LoginPanel;
 import org.springframework.boot.SpringApplication;
 import javax.swing.*;
@@ -25,7 +25,7 @@ public class LoginFrame extends JFrame {
         //设置窗体是否可见，刷新加载组件。注：需要在加载所有组件之后调用该方法，才可以正常显示组件
         setVisible(true);
         //窗体关闭监听
-        ListenerUtil.closeConfirm(this);
+        ExeListener.closeConfirm(this);
 
         //run
         SpringApplication.run(PhenomApplication.class);

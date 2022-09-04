@@ -1,7 +1,7 @@
 package com.phenom.swingview.window;
 
 import com.phenom.swingview.constant.ExeConstant;
-import com.phenom.swingview.eventlistener.ListenerUtil;
+import com.phenom.swingview.eventlistener.ExeListener;
 import com.phenom.swingview.jpanel.ExeInfoPanel;
 import com.phenom.swingview.jpanel.HostInfoPanel;
 import javax.swing.*;
@@ -20,7 +20,7 @@ public class MainFrame extends JFrame {
         //设置窗体是否可见。注：需要在加载所有组件之后调用该方法，才可以正常显示组件
         setVisible(true);
         //窗体关闭监听
-        ListenerUtil.closeConfirm(this);
+        ExeListener.closeConfirm(this);
     }
 
     /**
