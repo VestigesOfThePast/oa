@@ -29,41 +29,29 @@ public class ConsoleMonitorThread{
                 while(!toStop){
                     try{
                         String line = null;
-                        while (true) {
-                            try {
-                                //控制台日志超过1000行刷新
-                                if(ConsolePanel.jTextArea.getLineCount() > 500){
-                                    ConsolePanel.jTextArea.setText("");
-                                }
-                                line = RpaExeConsoleAppender.bufferedReader.readLine();
-                                ConsolePanel.jTextArea.append(line+"\n");
-                                //滚动条自动滚到最底部
-                                ConsolePanel.jTextArea.setCaretPosition(ConsolePanel.jTextArea.getText().length());
-                            } catch (IOException e) {
-                                logger.error("rpaExe 控制台日志写入失败");
-                            }
+                        //控制台日志超过1000行刷新
+                        if(ConsolePanel.jTextArea.getLineCount() > 500){
+                            ConsolePanel.jTextArea.setText("");
                         }
-                    } catch (Exception e) {
-                        if (!toStop) {
-                            logger.error(">>>>>>>>>>> rpaExe, console log monitor thread error:{}", e);
-                        }
+                        line = RpaExeConsoleAppender.bufferedReader.readLine();
+                        ConsolePanel.jTextArea.append(line+"\n");
+                        //滚动条自动滚到最底部
+                        ConsolePanel.jTextArea.setCaretPosition(ConsolePanel.jTextArea.getText().length());
+                    } catch (IOException e) {
+                        logger.error("rpaExe 控制台日志写入失败");
                     }
                 }
                 logger.info(">>>>>>>>>>> rpaExe, console log monitor thread stop");
             }
         });
+        //设置守护线程。主线程结束结束，子线程也结束
+        monitorThread.setDaemon(true);
         monitorThread.setName("rpaExe, console log monitor ConsoleMonitorThread");
         monitorThread.start();
     }
 
     public void toStop(){
         toStop = true;
-
-        try {
-            monitorThread.join();
-        } catch (InterruptedException e) {
-            logger.error(e.getMessage(), e);
-        }
     }
 }
 
