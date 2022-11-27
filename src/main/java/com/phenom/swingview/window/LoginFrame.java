@@ -1,5 +1,6 @@
 package com.phenom.swingview.window;
 
+import com.formdev.flatlaf.FlatLightLaf;
 import com.phenom.PhenomApplication;
 import com.phenom.swingview.constant.ExeConstant;
 import com.phenom.swingview.eventlistener.ExeListener;
@@ -35,6 +36,9 @@ public class LoginFrame extends JFrame {
      * 初始化窗体
      */
     public void init(){
+        //扁平化样式
+        FlatLightLaf.setup();
+        //窗体标题
         setTitle(ExeConstant.LOGIN_WINDOW_TITLE);
         //设置窗体禁止调整大小
         setResizable(false);
@@ -54,4 +58,5 @@ public class LoginFrame extends JFrame {
         c.setLayout(new GridLayout(1,1));
         c.add(new LoginPanel(this));
     }
+
 }

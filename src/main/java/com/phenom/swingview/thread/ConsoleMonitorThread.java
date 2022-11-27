@@ -5,7 +5,6 @@ import com.phenom.swingview.constant.ExeConstant;
 import com.phenom.swingview.jpanel.ConsolePanel;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import java.io.IOException;
 
 /**
  * @author olic
@@ -25,25 +24,25 @@ public class ConsoleMonitorThread{
 
     public void start(){
         monitorThread = new Thread(new Runnable() {
-
             @Override
             public void run() {
-                while(!toStop){
-                    try{
-                        String line = null;
-                        //控制台日志超过1000行刷新
-                        if(ConsolePanel.jTextArea.getLineCount() > ExeConstant.CONSOLE_LOG_MAX_NUM){
-                            ConsolePanel.jTextArea.setText("");
+                while (!toStop) {
+                    try {
+                        String line = RpaExeConsoleAppender.bufferedReader.readLine();
+                        if (ConsolePanel.jTextArea != null) {
+                            //控制台日志超过1000行刷新
+                            if (ConsolePanel.jTextArea.getLineCount() > ExeConstant.CONSOLE_LOG_MAX_NUM) {
+                                int end = ConsolePanel.jTextArea.getLineEndOffset(0);
+                                ConsolePanel.jTextArea.replaceRange("", 0, end);
+                            }
+                            ConsolePanel.jTextArea.append(line + "\n");
+                            //滚动条自动滚到最底部
+                            ConsolePanel.jTextArea.setCaretPosition(ConsolePanel.jTextArea.getText().length());
                         }
-                        line = RpaExeConsoleAppender.bufferedReader.readLine();
-                        ConsolePanel.jTextArea.append(line+"\n");
-                        //滚动条自动滚到最底部
-                        ConsolePanel.jTextArea.setCaretPosition(ConsolePanel.jTextArea.getText().length());
-                    } catch (IOException e) {
-                        logger.error("rpaExe 控制台日志写入失败");
+                    } catch (Exception e) {
                     }
                 }
-                logger.info(">>>>>>>>>>> rpaExe, console log monitor thread stop");
+                logger.error(">>>>>>>>>>> rpaExe, console log monitor thread stop");
             }
         });
         //设置守护线程。主线程结束结束，子线程也结束

@@ -20,10 +20,10 @@ public class ExeListener {
         jFrame.addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
-                int m = JOptionPane.showConfirmDialog(jFrame, ExeConstant.CLOSE_ALERT_MESSAGE, ExeConstant.ALERTTEXT, JOptionPane.YES_NO_OPTION);
-                if (m==JOptionPane.OK_OPTION) {
-                    System.exit(0);
-                }
+            int m = JOptionPane.showConfirmDialog(jFrame, ExeConstant.CLOSE_ALERT_MESSAGE, ExeConstant.ALERTTEXT, JOptionPane.YES_NO_OPTION);
+            if (m==JOptionPane.OK_OPTION) {
+                System.exit(0);
+            }
             }
         });
     }

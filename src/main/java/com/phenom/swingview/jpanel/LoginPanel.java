@@ -2,6 +2,15 @@ package com.phenom.swingview.jpanel;
 
 import com.phenom.swingview.constant.ExeConstant;
 import com.phenom.swingview.window.*;
+import javafx.event.EventHandler;
+import javafx.scene.Group;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
+import javafx.scene.web.WebEngine;
+import javafx.scene.web.WebView;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -12,6 +21,7 @@ import java.awt.event.ActionEvent;
  * @date 2022/8/2914:30
  */
 public class LoginPanel extends JPanel {
+
 
     public LoginPanel(JFrame jFrame){
         init();
@@ -57,6 +67,8 @@ public class LoginPanel extends JPanel {
         JPanel panelCenter = new JPanel();
         panelCenter.setLayout(new FlowLayout(FlowLayout.CENTER, 0, 2));
         JButton jButton = new JButton("弹出主页面");
+        jButton.setToolTipText("你好");
+        System.out.println(jButton.getToolTipText());
         jButton.setSize(100,100);
         //动作监听
         jButton.addActionListener(new AbstractAction() {
@@ -68,6 +80,8 @@ public class LoginPanel extends JPanel {
         });
         panelCenter.add(jButton);
         return panelCenter;
+
+
     }
 
     /**
